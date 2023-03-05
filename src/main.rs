@@ -88,7 +88,7 @@ async fn connect_db() -> Result<(), Box<dyn Error>> {
 }
 
 async fn parse_drone_information() -> Report {
-    let response = reqwest::get("http://assignments.reaktor.com/birdnest/drones").await;
+    let response = reqwest::get("<URL>").await;
     let res_text = response
         .expect("The response couldn't be parsed")
         .text()
@@ -117,7 +117,7 @@ fn find_drone_violations(drones: &Vec<Drone>) -> Vec<String> {
 async fn get_pilot_information(drone_srlNumbers: &Vec<String>) -> Vec<Pilot> {
     let mut pilots: Vec<Pilot> = vec![];
     for serialNumber in drone_srlNumbers {
-        let query_uri = format!("http://assignments.reaktor.com/birdnest/pilots/{serialNumber}");
+        let query_uri = format!("<URL>/{serialNumber}");
         let response = reqwest::get(query_uri).await;
         let res_text = response.expect("get").text().await.unwrap();
         let pilot_info: Pilot = serde_json::from_str(&res_text).unwrap();
